@@ -34,8 +34,8 @@ final class MapViewModel {
 
 extension MapViewModel: LocationManagerDelegate {
     func didUpdateUserLocation(_ location: CLLocation) {
-//        guard updatingIsStarted else { return }
-        coordinates.append(location.coordinate)
         self.location = location
+        guard updatingIsStarted else { return }
+        coordinates.append(location.coordinate)
     }
 }
