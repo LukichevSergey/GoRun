@@ -16,6 +16,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     
     private let locationManager = CLLocationManager()
+    private var location: CLLocation?
     weak var delegate: LocationManagerDelegate?
     
     private override init() {
@@ -36,10 +37,23 @@ final class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
     
+    func calculateDistance(routeCoordinates: [CLLocationCoordinate2D]) -> CLLocationDistance {
+        var totalDistance: CLLocationDistance = 0
+        if routeCoordinates.count > 1 {
+            for i in 0..<routeCoordinates.count-1 {
+                let source = CLLocation(latitude: routeCoordinates[i].latitude, longitude: routeCoordinates[i].longitude)
+                let destination = CLLocation(latitude: routeCoordinates[i+1].latitude, longitude: routeCoordinates[i+1].longitude)
+                totalDistance += source.distance(from: destination)
+            }
+        }
+        return totalDistance
+    }
+    
     // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
+        guard let location = locations.last else { return }
+        self.location = location
         delegate?.didUpdateUserLocation(location)
     }
     

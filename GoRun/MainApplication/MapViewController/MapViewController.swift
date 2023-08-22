@@ -12,8 +12,10 @@ import SnapKit
 
 final class MapViewController: UIViewController {
     
+    private let viewModel = MapViewModel()
     private let mapView = MKMapView()
     private let locationManager = LocationManager.shared
+    var coordinates: [CLLocationCoordinate2D] = []
     
     private func configureUI() {
         view.addSubview(mapView)
@@ -43,14 +45,28 @@ final class MapViewController: UIViewController {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = .red
+            renderer.lineWidth = 3
+            return renderer
+        }
+        return MKPolylineRenderer()
+    }
 }
-
 
 extension MapViewController: LocationManagerDelegate {
     func didUpdateUserLocation(_ location: CLLocation) {
         // Обновление отображения карты с новыми координатами пользователя
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
+        viewModel.userLocationUpdated(on: location)
+
+        coordinates.append(location.coordinate)
+
+        // Отрисовка линий на карте
+        let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        mapView.addOverlay(polyline)
     }
 }

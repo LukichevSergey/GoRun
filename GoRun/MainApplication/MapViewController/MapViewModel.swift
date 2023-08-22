@@ -9,5 +9,10 @@ import Foundation
 import CoreLocation
 
 final class MapViewModel {
+    
+    private var routeCoordinates: [CLLocationCoordinate2D] = []
 
+    func userLocationUpdated(on location: CLLocation) {
+        routeCoordinates.append(location.coordinate)
+    }
 }
