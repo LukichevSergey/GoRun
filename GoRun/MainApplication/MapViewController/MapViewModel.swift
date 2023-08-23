@@ -11,11 +11,11 @@ import Combine
 
 final class MapViewModel {
     
-    let locationManager = LocationManager.shared
+    private let locationManager = LocationManager.shared
+    private let trainingManager = TrainingManager.shared
     
     @Published var coordinates: [CLLocationCoordinate2D] = []
     @Published var location: CLLocation?
-    private var updatingIsStarted: Bool = false
     
     init() {
         locationManager.delegate = self
@@ -23,19 +23,33 @@ final class MapViewModel {
     
     func start() {
         locationManager.startUpdatingLocation()
-        updatingIsStarted = true
+        trainingManager.setTrainingStatus(on: .start)
+    }
+    
+    func pause() {
+        locationManager.stopUpdatingLocation()
+        trainingManager.setTrainingStatus(on: .pause)
+        trainingManager.updateTraining(with: coordinates)
+        coordinates = []
     }
     
     func stop() {
         locationManager.stopUpdatingLocation()
-        updatingIsStarted = false
+        trainingManager.setTrainingStatus(on: .stop)
+        trainingManager.updateTraining(with: coordinates)
+        trainingManager.stopTraining()
+        coordinates = []
+    }
+    
+    func requestAuthorization() {
+        locationManager.requestAuthorization()
     }
 }
 
 extension MapViewModel: LocationManagerDelegate {
     func didUpdateUserLocation(_ location: CLLocation) {
         self.location = location
-        guard updatingIsStarted else { return }
+        guard trainingManager.trainingStatus == .start else { return }
         coordinates.append(location.coordinate)
     }
 }

@@ -88,7 +88,7 @@ final class MapViewController: UIViewController {
         super.viewDidLoad()
         mapView.delegate = self
         mapView.userTrackingMode = .follow
-        viewModel.locationManager.requestAuthorization()
+        viewModel.requestAuthorization()
         configureUI()
         
         viewModel.$coordinates

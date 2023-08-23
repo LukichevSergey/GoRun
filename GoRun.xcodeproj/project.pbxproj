@@ -17,6 +17,8 @@
 		8795B12B2A94DDEB00264829 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795B12A2A94DDEB00264829 /* MapViewModel.swift */; };
 		8795B12E2A94DE9900264829 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8795B12D2A94DE9900264829 /* SnapKit */; };
 		8795B1312A94E52700264829 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795B1302A94E52700264829 /* LocationManager.swift */; };
+		87DCA13A2A96385B00EC0497 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DCA1392A96385B00EC0497 /* Training.swift */; };
+		87DCA13C2A96392100EC0497 /* TrainingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DCA13B2A96392100EC0497 /* TrainingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		8795B1282A94DDBA00264829 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8795B12A2A94DDEB00264829 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		8795B1302A94E52700264829 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		87DCA1392A96385B00EC0497 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
+		87DCA13B2A96392100EC0497 /* TrainingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 		8795B1262A94DD3600264829 /* MainApplication */ = {
 			isa = PBXGroup;
 			children = (
+				87DCA1382A96382500EC0497 /* Models */,
 				8795B12F2A94E51800264829 /* Helpers */,
 				8795B1272A94DD9200264829 /* MapViewController */,
 			);
@@ -98,8 +103,17 @@
 			isa = PBXGroup;
 			children = (
 				8795B1302A94E52700264829 /* LocationManager.swift */,
+				87DCA13B2A96392100EC0497 /* TrainingManager.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		87DCA1382A96382500EC0497 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87DCA1392A96385B00EC0497 /* Training.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,12 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87DCA13A2A96385B00EC0497 /* Training.swift in Sources */,
 				8795B1172A94DCC900264829 /* ViewController.swift in Sources */,
 				8795B12B2A94DDEB00264829 /* MapViewModel.swift in Sources */,
 				8795B1312A94E52700264829 /* LocationManager.swift in Sources */,
 				8795B1132A94DCC900264829 /* AppDelegate.swift in Sources */,
 				8795B1152A94DCC900264829 /* SceneDelegate.swift in Sources */,
 				8795B1292A94DDBA00264829 /* MapViewController.swift in Sources */,
+				87DCA13C2A96392100EC0497 /* TrainingManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
