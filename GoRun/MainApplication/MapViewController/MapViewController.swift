@@ -15,8 +15,17 @@ final class MapViewController: UIViewController {
     
     private let viewModel = MapViewModel()
     private let mapView = MKMapView()
-    private var coordinatesSubscription = Set<AnyCancellable>()
     private var locationSubscription = Set<AnyCancellable>()
+    
+    private var trainingIsStarted: Bool = false {
+        didSet {
+            if trainingIsStarted {
+                startButton.setTitle("Пауза", for: .normal)
+            } else {
+                startButton.setTitle("Старт", for: .normal)
+            }
+        }
+    }
     
     private lazy var startButton: UIButton = {
         let button = UIButton()
@@ -53,10 +62,12 @@ final class MapViewController: UIViewController {
     }()
     
     @objc private func startButtonTapped() {
-        viewModel.start()
+        trainingIsStarted.toggle()
+        trainingIsStarted ? viewModel.start() : viewModel.pause()
     }
     
     @objc private func stopButtonTapped() {
+        trainingIsStarted = false
         viewModel.stop()
     }
     
@@ -80,7 +91,6 @@ final class MapViewController: UIViewController {
     }
     
     deinit {
-        coordinatesSubscription.removeAll()
         locationSubscription.removeAll()
     }
     
@@ -91,23 +101,20 @@ final class MapViewController: UIViewController {
         viewModel.requestAuthorization()
         configureUI()
         
-        viewModel.$coordinates
-            .dropFirst()
-            .sink { [weak self] coordinates in
-                self?.renderWayLine(by: coordinates)
-            }.store(in: &coordinatesSubscription)
-        
         viewModel.$location
             .sink { [weak self] location in
-                guard let location else { return }
-                self?.setRegion(location)
+                guard let location, let self else { return }
+                self.setRegion(location)
+                self.renderWayLine(by: self.viewModel.getCoordinates())
             }.store(in: &locationSubscription)
     }
     
-    private func renderWayLine(by coordinates: [CLLocationCoordinate2D]) {
+    private func renderWayLine(by coordinates: [[CLLocationCoordinate2D]]) {
         // Отрисовка линий на карте
-        let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
-        mapView.addOverlay(polyline)
+        coordinates.forEach { coordinatesLine in
+            let polyline = MKPolyline(coordinates: coordinatesLine, count: coordinates.count)
+            mapView.addOverlay(polyline)
+        }
     }
 }
 

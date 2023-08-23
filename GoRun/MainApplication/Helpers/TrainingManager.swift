@@ -33,6 +33,10 @@ final class TrainingManager {
         currentTraining?.coordinates.append(coordinates)
     }
     
+    func getCurrentTrainingCoordinates() -> [[CLLocationCoordinate2D]] {
+        return currentTraining?.coordinates ?? []
+    }
+    
     func stopTraining() {
         currentTraining?.finishTime = Date()
         guard let currentTraining else { return }

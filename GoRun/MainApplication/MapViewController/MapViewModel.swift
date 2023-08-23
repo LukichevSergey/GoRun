@@ -13,8 +13,8 @@ final class MapViewModel {
     
     private let locationManager = LocationManager.shared
     private let trainingManager = TrainingManager.shared
+    private var coordinates: [CLLocationCoordinate2D] = []
     
-    @Published var coordinates: [CLLocationCoordinate2D] = []
     @Published var location: CLLocation?
     
     init() {
@@ -43,6 +43,10 @@ final class MapViewModel {
     
     func requestAuthorization() {
         locationManager.requestAuthorization()
+    }
+    
+    func getCoordinates() -> [[CLLocationCoordinate2D]] {
+        trainingManager.getCurrentTrainingCoordinates()
     }
 }
 
