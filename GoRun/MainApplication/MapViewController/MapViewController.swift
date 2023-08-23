@@ -112,7 +112,7 @@ final class MapViewController: UIViewController {
     private func renderWayLine(by coordinates: [[CLLocationCoordinate2D]]) {
         // Отрисовка линий на карте
         coordinates.forEach { coordinatesLine in
-            let polyline = MKPolyline(coordinates: coordinatesLine, count: coordinates.count)
+            let polyline = MKPolyline(coordinates: coordinatesLine, count: coordinatesLine.count)
             mapView.addOverlay(polyline)
         }
     }

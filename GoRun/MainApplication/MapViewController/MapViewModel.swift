@@ -23,7 +23,9 @@ final class MapViewModel {
     
     func start() {
         locationManager.startUpdatingLocation()
+        trainingManager.createTraining()
         trainingManager.setTrainingStatus(on: .start)
+        print(trainingManager.trainingStatus)
     }
     
     func pause() {
@@ -46,7 +48,9 @@ final class MapViewModel {
     }
     
     func getCoordinates() -> [[CLLocationCoordinate2D]] {
-        trainingManager.getCurrentTrainingCoordinates()
+        var coordinstes = trainingManager.getCurrentTrainingCoordinates()
+        coordinstes.append(self.coordinates)
+        return coordinstes
     }
 }
 

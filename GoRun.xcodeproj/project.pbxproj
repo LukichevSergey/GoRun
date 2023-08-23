@@ -35,6 +35,7 @@
 		8795B1302A94E52700264829 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		87DCA1392A96385B00EC0497 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 		87DCA13B2A96392100EC0497 /* TrainingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingManager.swift; sourceTree = "<group>"; };
+		87DCA13D2A964A1700EC0497 /* new.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = new.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 		8795B1262A94DD3600264829 /* MainApplication */ = {
 			isa = PBXGroup;
 			children = (
+				87DCA13E2A964F4100EC0497 /* Data */,
 				87DCA1382A96382500EC0497 /* Models */,
 				8795B12F2A94E51800264829 /* Helpers */,
 				8795B1272A94DD9200264829 /* MapViewController */,
@@ -114,6 +116,14 @@
 				87DCA1392A96385B00EC0497 /* Training.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		87DCA13E2A964F4100EC0497 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				87DCA13D2A964A1700EC0497 /* new.gpx */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
